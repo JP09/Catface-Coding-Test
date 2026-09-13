@@ -1,5 +1,7 @@
 package com.catface.codingtest;
 
+import com.catface.codingtest.command.CameraCommand;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -106,6 +108,12 @@ public class CatfaceCodingTestMod {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(EXAMPLE_BLOCK_ITEM);
         }
+    }
+
+    // subscribe event to let Event bus discover method
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent event){
+        CameraCommand.register(event.getDispatcher());
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
