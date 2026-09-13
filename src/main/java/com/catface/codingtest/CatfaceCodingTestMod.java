@@ -1,6 +1,7 @@
 package com.catface.codingtest;
 
 import com.catface.codingtest.command.CameraCommand;
+import com.catface.codingtest.manager.KeyframeManager;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
 
@@ -40,6 +41,10 @@ public class CatfaceCodingTestMod {
     public static final String MODID = "catfacecodingtestmod";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final KeyframeManager KEYFRAME_MANAGER =
+            new KeyframeManager();
+
     // Create a Deferred Register to hold Blocks which will all be registered under the "catfacecodingtestmod" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
     // Create a Deferred Register to hold Items which will all be registered under the "catfacecodingtestmod" namespace
@@ -113,7 +118,10 @@ public class CatfaceCodingTestMod {
     // subscribe event to let Event bus discover method
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event){
-        CameraCommand.register(event.getDispatcher());
+        CameraCommand.register(
+                event.getDispatcher(),
+                KEYFRAME_MANAGER
+        );
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
