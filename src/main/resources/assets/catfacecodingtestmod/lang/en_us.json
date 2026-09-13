@@ -1,0 +1,13 @@
+{
+  "itemGroup.catfacecodingtestmod": "Example Mod Tab",
+  "block.catfacecodingtestmod.example_block": "Example Block",
+  "item.catfacecodingtestmod.example_item": "Example Item",
+
+  "catfacecodingtestmod.configuration.title": "Catface Coding Test Mod Configs",
+  "catfacecodingtestmod.configuration.section.catfacecodingtestmod.common.toml": "Catface Coding Test Mod Configs",
+  "catfacecodingtestmod.configuration.section.catfacecodingtestmod.common.toml.title": "Catface Coding Test Mod Configs",
+  "catfacecodingtestmod.configuration.items": "Item List",
+  "catfacecodingtestmod.configuration.logDirtBlock": "Log Dirt Block",
+  "catfacecodingtestmod.configuration.magicNumberIntroduction": "Magic Number Text",
+  "catfacecodingtestmod.configuration.magicNumber": "Magic Number"
+}
