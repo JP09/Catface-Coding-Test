@@ -2,6 +2,7 @@ package com.catface.codingtest.manager;
 
 import com.catface.codingtest.model.KeyframeSequence;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +57,8 @@ public class KeyframeManager {
     public String getCurrentSequenceName() {
         return currentSequenceName;
     }
+
+    public Collection<KeyframeSequence> getAllSequences() { return sequences.values(); }
 
     public Map<String, KeyframeSequence> getSequences() {
         return sequences;

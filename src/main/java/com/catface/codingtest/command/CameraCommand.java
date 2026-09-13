@@ -170,8 +170,7 @@ public class CameraCommand {
                                                                     );
 
                                                             KeyframeSequence sequence =
-                                                                    keyframeManager
-                                                                            .getOrCreateSequence(name);
+                                                                    keyframeManager.getCurrentSequence();
 
                                                             sequence.addKeyframe(keyframe);
 
