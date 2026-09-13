@@ -32,7 +32,31 @@ public class CameraCommand {
                             return 1;
                         })
 
-                        //update for '/camkey play <sequence> <seconds>
+                        //update for '/camkey list'
+                        .then(Commands.literal("list")
+                                .executes(context ->  {
+                                    KeyframeSequence sequence = keyframeManager.getCurrentSequence();
+
+                                    if(sequence == null) {
+                                        context.getSource().sendFailure(
+                                                Component.literal("No sequence selected.")
+                                        );
+
+                                        return 0;
+                                    }
+
+                                    context.getSource().sendSuccess(
+                                            () -> Component.literal(
+                                                    "Sequence '" + sequence.getName() + "' contains " + sequence.getKeyframes().size() + " keyframe(s)."
+                                            ),
+                                            false
+                                    );
+
+                                    return 1;
+                                })
+                        )
+
+                        //update for '/camkey play <sequence> <seconds>'
                         .then(
                                 Commands.literal("play")
                                         .then(
