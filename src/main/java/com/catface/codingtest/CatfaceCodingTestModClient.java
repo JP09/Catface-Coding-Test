@@ -1,5 +1,7 @@
 package com.catface.codingtest;
 
+import com.catface.codingtest.playback.CameraController;
+import com.catface.codingtest.playback.CameraPlayback;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -7,6 +9,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
@@ -27,5 +30,27 @@ public class CatfaceCodingTestModClient {
         // Some client setup code
         CatfaceCodingTestMod.LOGGER.info("HELLO FROM CLIENT SETUP");
         CatfaceCodingTestMod.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    }
+
+    private static CameraController cameraController;
+    private static CameraPlayback cameraPlayback;
+
+    public static void init() {
+        cameraController = new CameraController();
+        cameraPlayback = new CameraPlayback(cameraController);
+    }
+
+    public static CameraPlayback getCameraPlayback() {
+        if (cameraPlayback == null) {
+            init();
+        }
+        return cameraPlayback;
+    }
+
+    @SubscribeEvent
+    public static void onClientTick(ClientTickEvent.Post event) {
+        if (cameraPlayback != null && cameraPlayback.isPlaying()) {
+            cameraPlayback.update();
+        }
     }
 }

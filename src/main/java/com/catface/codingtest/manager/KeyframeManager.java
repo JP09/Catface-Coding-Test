@@ -10,6 +10,8 @@ public class KeyframeManager {
     private final Map<String, KeyframeSequence> sequences =
             new HashMap<>();
 
+    private String currentSequenceName;
+
     public KeyframeSequence getOrCreateSequence(String name) {
         return sequences.computeIfAbsent(
                 name,
@@ -27,6 +29,32 @@ public class KeyframeManager {
 
     public void deleteSequence(String name){
         sequences.remove(name);
+
+        if (name.equals(currentSequenceName)) {
+            currentSequenceName = null;
+        }
+    }
+
+    public void setCurrentSequenceName(String name){
+        if (!sequences.containsKey(name)) {
+            throw new IllegalArgumentException(
+                    "Sequence does not exist: " + name
+            );
+        }
+
+        currentSequenceName = name;
+    }
+
+    public KeyframeSequence getCurrentSequence(){
+        if (currentSequenceName == null) {
+            return null;
+        }
+
+        return sequences.get(currentSequenceName);
+    }
+
+    public String getCurrentSequenceName() {
+        return currentSequenceName;
     }
 
     public Map<String, KeyframeSequence> getSequences() {
