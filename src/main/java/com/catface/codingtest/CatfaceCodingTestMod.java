@@ -2,7 +2,9 @@ package com.catface.codingtest;
 
 import com.catface.codingtest.command.CameraCommand;
 import com.catface.codingtest.manager.KeyframeManager;
+import com.catface.codingtest.manager.KeyframeStorage;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -129,5 +131,13 @@ public class CatfaceCodingTestMod {
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+        KeyframeStorage.load(event.getServer(), KEYFRAME_MANAGER);
+    }
+
+    @SubscribeEvent
+    public void onServerStopping(ServerStoppingEvent event) {
+        // Do something when the server stops
+        LOGGER.info("GOODBYE from server stopping");
+        KeyframeStorage.save(event.getServer(), KEYFRAME_MANAGER);
     }
 }
