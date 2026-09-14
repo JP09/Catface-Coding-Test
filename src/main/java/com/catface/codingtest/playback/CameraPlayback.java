@@ -30,11 +30,15 @@ public class CameraPlayback {
         this.durationMillis = (long) (seconds * 1000.0);
         this.startTime = System.currentTimeMillis();
         this.playing = true;
+
+        cameraController.startCamera();
     }
 
     public void stop() {
         this.playing = false;
         this.activeSequence = null;
+
+        cameraController.stopCamera();
     }
 
     public boolean isPlaying() {
